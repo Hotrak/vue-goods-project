@@ -1,6 +1,6 @@
 <template>
     <div style="background-color: red;">
-        header
+        Товары
     </div>
 </template>
 <script>

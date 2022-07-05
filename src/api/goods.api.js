@@ -1,5 +1,5 @@
-import goods from './goods.json';
-import goodsCategory from './goodsCategory.json';
+import goods from '../assets/goods.json';
+import goodsCategory from '../assets/goodsCategory.json';
 
 const getGoods = () => {
     const formattedGoods = goods.Value.Goods.map(item => {

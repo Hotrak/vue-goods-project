@@ -9,29 +9,26 @@
             <td style="width: 500px">
                 {{ item.name }} <span></span>
             </td>
-            <td style="width: 50px">
-                {{ item.price }}$
+            <td style="width: 80px">
+                {{ formatRUBPrice(item.rubPrice) }}
             </td>
             <td>
-                 <button @click="$emit('click:basket', item)">add to chart</button>
+                 <button v-if="!item.basketCount" @click="$emit('click:basket', item)">В корзину</button>
+				 <div v-else>
+					В корзине
+				 </div>
             </td>
         </tr>
     </table>
 </template>
 <script>
+import myMixin from '@/mixins/cash';
 export default {
+	mixins: [myMixin],
     components: {},
     props: {
         items: Array,
         category: Object,
-    },
-    methods: {
-        getItemsByCategory(id) {
-            return this.items.filter((i) => i.categoryId == id);
-        },
-        itemChartClick(item){
-            console.log(item);
-        }
     },
 };
 </script>

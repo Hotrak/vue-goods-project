@@ -1,18 +1,28 @@
 import { defineStore } from "pinia";
-import goodsApi from "../api/goods.api.js";
+import { useStore as useGoodsStore } from './goods'
 
-// useStore could be anything like useUser, useCart
-// the first argument is a unique id of the store across your application
 export const useStore = defineStore("basket", {
     state: () => ({
         items: [],
     }),
     actions: {
         deleteItem(item){
-            this.items = this.items.filter((i) => i.id !== item.id);
+			item.basketCount = 0;
+            this.items = this.items.filter((i) => i !== item.id);
         },
         addItem(item) {
-            this.items.push(item);
+			item.basketCount = 1;
+            this.items.push(item.id);
         }
     },
+	getters: {
+		totalPrice: (state) => state.formattedItems.reduce((x, y)=> x + y.price, 0),
+		formattedItems(state) {
+			const goodsStore = useGoodsStore();
+			return state.items.map(i => {
+				
+				return goodsStore.goods.find(item => item.id == i);
+			})
+		}
+	}
 });
