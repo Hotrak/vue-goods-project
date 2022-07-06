@@ -1,14 +1,17 @@
 <template>
     <Header/>
+    <CurrencyRateUpdater/>
     <RouterView />
 </template>
 
 <script>
 import Header from '@/components/core/Header.vue'
+import CurrencyRateUpdater from './components/CurrencyRateUpdater.vue'
 export default {
     components: {
-        Header,
-    }
+    Header,
+    CurrencyRateUpdater
+}
 }
 </script>
 <style>

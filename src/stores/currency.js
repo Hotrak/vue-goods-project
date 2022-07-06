@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useStore = defineStore("currency", {
     state: () => ({
-        usdToRubRate: 20,
+        usdToRubRate: 44,
     }),
 	actions: {
 		updateUsdToRubRate(value){

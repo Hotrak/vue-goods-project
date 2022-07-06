@@ -7,7 +7,7 @@
             @click:basket="addToBasket"
             @click:select="editItem"
         />
-        <Form :item="selectedItem"/>
+        <!-- <Form :item="selectedItem"/> -->
     </div>
 </template>
 <script>
@@ -18,7 +18,6 @@ import { useStore as useBasketStore } from "@/stores/basket";
 import { useStore as useCurrencyStore } from "@/stores/currency";
 
 import { mapActions, mapState } from "pinia";
- import jsonData from '../assets/goodsCategory.json'
 import Form from "./Form.vue";
 
 export default {
@@ -44,14 +43,12 @@ export default {
 	},
     mounted() {
 		this.fetchData();
-		console.log(this.usdToRubRate, "+++");
-		// setInterval(this.fetchData, 3000)
-
     },
     methods: {
         ...mapActions(useGoodsStore, ["fetchGoods"]),
         ...mapActions(useCategoryStore, ["fetchCategories"]),
         ...mapActions(useBasketStore, ["addItem"]),
+
         addToBasket(item) {
             this.addItem(item);
         },

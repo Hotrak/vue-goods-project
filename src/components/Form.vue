@@ -1,13 +1,14 @@
 <template>
     <div>
+        <h2 class="title">Редактирование</h2>
         <div>
-            <input v-model="item.name">
+            <ui-input v-model="item.name" title="Наименование"/>
         </div>
         <div>
-            <input v-model="item.price">
+            <ui-input v-model="item.name" title="Цена (доллары)"/>
         </div>
         <div>
-            <input v-model="item.price">
+            <ui-input v-model="item.name" type="number" title="Количество"/>
         </div>
     </div>
 </template>

@@ -1,11 +1,15 @@
 <template>
-    <div>{{formatRUBPrice(item.rubPrice)}}
-    <span v-if="isPriceUp" class="arrow green">🠕</span>
-    <span v-else class="arrow red">🠗</span>
+    <div>
+        <div>
+            <slot name="value" :item="item" :format="formatRUBPrice">{{ formatRUBPrice(item.rubPrice) }}</slot>
+            <template v-if="this.item.oldRubPrice">
+                <span v-if="isPriceUp" class="arrow green">🠕</span>
+                <span v-else class="arrow red">🠗</span>
+            </template>
+        </div>
     </div>
 </template>
 <script>
-
 // Стрелки ← ↑ → ↓ △ ▽ ◁ ▷ Cимволы стрелок и ...
 import cashMixin from "@/mixins/cash";
 export default {
@@ -14,22 +18,19 @@ export default {
         item: Object,
     },
     computed: {
-        isPriceUp(){
+        isPriceUp() {
             return this.item.oldRubPrice <= this.item.rubPrice;
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style>
-.arrow {
-    font-size: 18px;
-}
-.green{
+
+.green {
     color: #31ae18;
 }
 .red {
     color: #e62c2c;
 }
-
 </style>
