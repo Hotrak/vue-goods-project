@@ -18,16 +18,16 @@
             </td>
         </tr>
     </table>
-	{{convertUsdToRubFormat(totalPrice)}}
+	{{formatRUBPrice(totalPrice)}}
 </div>
 </template>
 <script>
 import { useStore as useBasketStore } from "@/stores/basket";
 import { mapState, mapActions } from "pinia";
-import myMixin from '@/mixins/cash';
+import cashMixin from '@/mixins/cash';
 
 export default {
-	mixins: [myMixin],
+	mixins: [cashMixin],
     computed: {
         ...mapState(useBasketStore, ["formattedItems", 'totalPrice']),
     },

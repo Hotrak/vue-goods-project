@@ -1,5 +1,6 @@
 <template>
-    <div style="background-color: red;">
+    <div >
+        <!-- style="background-color: red;" -->
         Товары
     </div>
 </template>

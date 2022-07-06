@@ -6,23 +6,24 @@ export const useStore = defineStore("basket", {
         items: [],
     }),
     actions: {
-        deleteItem(item){
-			item.basketCount = 0;
+        deleteItem(item) {
+            item.basketCount = 0;
             this.items = this.items.filter((i) => i !== item.id);
         },
         addItem(item) {
-			item.basketCount = 1;
+            item.basketCount = 1;
             this.items.push(item.id);
-        }
+        },
     },
-	getters: {
-		totalPrice: (state) => state.formattedItems.reduce((x, y)=> x + y.price, 0),
-		formattedItems(state) {
-			const goodsStore = useGoodsStore();
-			return state.items.map(i => {
-				
-				return goodsStore.goods.find(item => item.id == i);
-			})
-		}
-	}
+    getters: {
+        totalPrice: (state) =>
+            state.formattedItems.reduce((x, y) => x + y.rubPrice, 0),
+        formattedItems(state) {
+            const goodsStore = useGoodsStore();
+            return state.items.map((i) => {
+                return goodsStore.goods.find((item) => item.id == i);
+            });
+        },
+        isItemInBasket: (state) => (item) => !!state.items.find(i=> i == item.id)
+    },
 });

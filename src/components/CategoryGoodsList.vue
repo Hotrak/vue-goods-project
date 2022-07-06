@@ -13,7 +13,7 @@
                 {{ formatRUBPrice(item.rubPrice) }}
             </td>
             <td>
-                 <button v-if="!item.basketCount" @click="$emit('click:basket', item)">В корзину</button>
+                 <button v-if="!isItemInBasket(item)" @click="$emit('click:basket', item)">В корзину</button>
 				 <div v-else>
 					В корзине
 				 </div>
@@ -22,13 +22,19 @@
     </table>
 </template>
 <script>
-import myMixin from '@/mixins/cash';
+import { useStore as useBasketStore } from "@/stores/basket";
+
+import cashMixin from '@/mixins/cash';
+import { mapState } from 'pinia';
 export default {
-	mixins: [myMixin],
-    components: {},
+	mixins: [cashMixin],
     props: {
         items: Array,
         category: Object,
+
     },
+    computed: {
+        ...mapState(useBasketStore, ['isItemInBasket'])
+    }
 };
 </script>
