@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useStore as useGoodsStore } from './goods'
+import { useStore as useGoodsStore } from "./goods";
 
 export const useStore = defineStore("basket", {
     state: () => ({
@@ -7,23 +7,32 @@ export const useStore = defineStore("basket", {
     }),
     actions: {
         deleteItem(item) {
-            item.basketCount = 0;
-            this.items = this.items.filter((i) => i !== item.id);
+            this.items = this.items.filter((i) => i.id !== item.id);
         },
         addItem(item) {
-            item.basketCount = 1;
-            this.items.push(item.id);
+            this.items.push({
+                id: item.id,
+                count: 1,
+            });
         },
+        setItemCount({item, count}){
+            const exItem = this.items.find((i) => i.id == item.id);
+            exItem.count = count;
+        }
     },
     getters: {
         totalPrice: (state) =>
-            state.formattedItems.reduce((x, y) => x + y.rubPrice, 0),
+            state.formattedItems.reduce((x, y) => x + y.rubPrice * y.count, 0),
         formattedItems(state) {
             const goodsStore = useGoodsStore();
             return state.items.map((i) => {
-                return goodsStore.goods.find((item) => item.id == i);
+                return {
+                    ...goodsStore.goods.find((item) => item.id == i.id),
+                    count: i.count,
+                };
             });
         },
-        isItemInBasket: (state) => (item) => !!state.items.find(i=> i == item.id)
+        isItemInBasket: (state) => (item) =>
+            !!state.items.find((i) => i.id == item.id),
     },
 });

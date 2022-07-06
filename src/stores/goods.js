@@ -11,9 +11,13 @@ export const useStore = defineStore("goods", {
         fetchGoods() {
 			const currencyStore = useCurrencyStore();
 			// currencyStore.usdToRubRate
-            this.goods = goodsApi.getGoods().map(i => {
-				i.rubPrice = i.price * currencyStore.usdToRubRate;
-				return i;
+            this.goods = goodsApi.getGoods().map(item => {
+				item.rubPrice = item.price * currencyStore.usdToRubRate;
+
+                item.oldRubPrice = this.goods.find(
+                    (i) => i.id == item.id
+                )?.rubPrice;
+				return item;
 			});
         },
     },

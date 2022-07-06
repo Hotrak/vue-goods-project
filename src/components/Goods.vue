@@ -1,17 +1,17 @@
 <template>
     <div>
-        <template v-for="category in categories" :key="category.id">
-            <CategoryGoodsList
-                v-if="getItemsByCategory(category.id).length"
-                :items="getItemsByCategory(category.id)"
-                :category="category"
-                @click:basket="addToBasket"
-            />
-        </template>
+        <h2 class="title">Товары</h2>
+        <GoodsTable
+            :items="goods"
+            :categories="categories"
+            @click:basket="addToBasket"
+            @click:select="editItem"
+        />
+        <Form :item="selectedItem"/>
     </div>
 </template>
 <script>
-import CategoryGoodsList from "@/components/CategoryGoodsList.vue";
+import GoodsTable from "@/components/GoodsTable.vue";
 import { useStore as useGoodsStore } from "@/stores/goods";
 import { useStore as useCategoryStore } from "@/stores/category";
 import { useStore as useBasketStore } from "@/stores/basket";
@@ -19,10 +19,17 @@ import { useStore as useCurrencyStore } from "@/stores/currency";
 
 import { mapActions, mapState } from "pinia";
  import jsonData from '../assets/goodsCategory.json'
+import Form from "./Form.vue";
 
 export default {
     components: {
-        CategoryGoodsList,
+        GoodsTable,
+        Form
+    },
+    data() {
+        return {
+            selectedItem: undefined,
+        }
     },
     computed: {
         ...mapState(useGoodsStore, ["goods"]),
@@ -45,11 +52,11 @@ export default {
         ...mapActions(useGoodsStore, ["fetchGoods"]),
         ...mapActions(useCategoryStore, ["fetchCategories"]),
         ...mapActions(useBasketStore, ["addItem"]),
-        getItemsByCategory(id) {
-            return this.goods.filter((i) => i.categoryId == id);
-        },
         addToBasket(item) {
             this.addItem(item);
+        },
+        editItem(item){
+            this.selectedItem = item;
         },
 		fetchData(){
 			this.fetchGoods();

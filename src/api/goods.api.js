@@ -10,7 +10,7 @@ const getGoods = () => {
 
         return {
             id: item.T,
-            count: item.P,
+            totalCount: item.P,
             price: item.C,
             categoryId: item.G,
             categoryName: category?.G,
