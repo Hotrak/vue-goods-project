@@ -1,20 +1,19 @@
 <template>
-    <Header/>
-    <CurrencyRateUpdater/>
-    <RouterView />
+  <Header />
+  <CurrencyRateUpdater />
+  <RouterView />
 </template>
 
 <script>
-import Header from '@/components/core/Header.vue'
-import CurrencyRateUpdater from './components/CurrencyRateUpdater.vue'
+import Header from "@/components/core/Header.vue";
+import CurrencyRateUpdater from "./components/CurrencyRateUpdater.vue";
 export default {
-    components: {
+  components: {
     Header,
-    CurrencyRateUpdater
-}
-}
+    CurrencyRateUpdater,
+  },
+};
 </script>
 <style>
 @import "@/assets/base.css";
-
 </style>
