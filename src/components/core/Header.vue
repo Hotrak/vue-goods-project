@@ -5,23 +5,20 @@
                 <div style="margin-right: 10px;">
                     Курс доллара 
                 </div> 
-                <Counter v-model="usdToRubRate" @update:modelValue="updateUsdToRubRate">
-                    <b>{{usdToRubRate}}</b>
+                <Counter v-model="currencyStore.usdToRubRate">
+                    <b>{{currencyStore.usdToRubRate}}</b>
                 </Counter>
             </div>
         </div>
     </header>
 </template>
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapStores } from 'pinia'
 import { useStore as useCurrencyStore } from '@/stores/currency'
 import Counter from '../Counter.vue'
 export default {
     computed: {
-        ...mapState(useCurrencyStore, ["usdToRubRate"])
-    },
-    methods: {
-        ...mapActions(useCurrencyStore, ['updateUsdToRubRate'])
+        ...mapStores(useCurrencyStore)
     },
     components: { Counter }
 }

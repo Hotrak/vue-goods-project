@@ -1,17 +1,20 @@
 <template>
     <main>
-        <section class="container wrapper">
-            <Goods class="goods" />
-            <Form class="form" />
-            <Basket class="basket" />
+        <section class="container goods-section">
+            <Goods class="goods-section__goods" />
+            <Form class="goods-section__form" :item="goodsStore.selectedItem"/>
+            <Basket class="goods-section__basket" />
         </section>
     </main>
 </template>
 <script>
 import Goods from "@/components/Goods.vue";
 import Basket from "@/components/Basket.vue";
-
 import Form from "../components/Form.vue";
+import { mapStores } from "pinia"; 
+
+import { useStore as useGoodsStore } from "@/stores/goods";
+
 
 export default {
     components: {
@@ -19,29 +22,32 @@ export default {
         Basket,
         Form,
     },
+     computed: {
+        ...mapStores(useGoodsStore)
+    },
 };
 </script>
 
 <style scoped>
-.wrapper {
+.goods-section {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: 80px;
     column-gap: 2rem;
 }
-.goods {
+.goods-section__goods {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
 }
-.form {
+.goods-section__form {
     grid-column-start: 4;
     grid-column-end: 6;
     grid-row-start: 1;
     grid-row-end: 3;
 }
-.basket {
+.goods-section__basket {
     grid-column-start: 4;
     grid-column-end: 6;
     grid-row-start: 4;

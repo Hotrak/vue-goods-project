@@ -2,12 +2,11 @@
     <div>
         <h2 class="title">Товары</h2>
         <GoodsTable
-            :items="goods"
-            :categories="categories"
+            :items="goodsStore.goods"
+            :categories="categoryStore.categories"
             @click:basket="addToBasket"
             @click:select="editItem"
         />
-        <!-- <Form :item="selectedItem"/> -->
     </div>
 </template>
 <script>
@@ -17,24 +16,15 @@ import { useStore as useCategoryStore } from "@/stores/category";
 import { useStore as useBasketStore } from "@/stores/basket";
 import { useStore as useCurrencyStore } from "@/stores/currency";
 
-import { mapActions, mapState } from "pinia";
-import Form from "./Form.vue";
+import { mapActions, mapState, mapStores } from "pinia";
 
 export default {
     components: {
-        GoodsTable,
-        Form
-    },
-    data() {
-        return {
-            selectedItem: undefined,
-        }
+        GoodsTable
     },
     computed: {
-        ...mapState(useGoodsStore, ["goods"]),
-        ...mapState(useCategoryStore, ["categories"]),
-        ...mapState(useBasketStore, ["items"]),
         ...mapState(useCurrencyStore, ["usdToRubRate"]),
+        ...mapStores(useGoodsStore, useCategoryStore)
     },
 	watch: {
 		usdToRubRate(){
@@ -45,19 +35,17 @@ export default {
 		this.fetchData();
     },
     methods: {
-        ...mapActions(useGoodsStore, ["fetchGoods"]),
-        ...mapActions(useCategoryStore, ["fetchCategories"]),
         ...mapActions(useBasketStore, ["addItem"]),
 
         addToBasket(item) {
             this.addItem(item);
         },
         editItem(item){
-            this.selectedItem = item;
+            this.goodsStore.selectedItem = item;
         },
 		fetchData(){
-			this.fetchGoods();
-        	this.fetchCategories();
+			this.goodsStore.fetchGoods();
+        	this.categoryStore.fetchCategories();
 		}
     },
 };
