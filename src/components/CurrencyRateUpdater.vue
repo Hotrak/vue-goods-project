@@ -9,9 +9,8 @@ export default {
     mounted() {
         setInterval(() => {
             const newRate = Math.floor(Math.random() * (80 - 20) + 20);
-            console.log(newRate);
             this.updateUsdToRubRate(newRate);
-        }, 1000);
+        }, 1000 * 15);
     },
 	methods: {
 		...mapActions(useCurrencyStore, ['updateUsdToRubRate'])

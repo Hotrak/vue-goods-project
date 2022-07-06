@@ -20,9 +20,6 @@
                     title="Количество"
                 />
             </div>
-            <!-- <div class="form__element4">
-                <button>Сохранить</button>
-            </div> -->
         </form>
     </div>
 </template>

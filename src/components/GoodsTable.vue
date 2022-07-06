@@ -71,10 +71,8 @@ td,
 th,
 tr {
     border: 1px solid #616161;
-    /* border-top: none; */
 }
 table tr td, th {
-    /* padding-right: 10px; */
     padding: 5px 10px;
     vertical-align: top;
     height: 40px;

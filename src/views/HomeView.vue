@@ -15,7 +15,6 @@ import { mapStores } from "pinia";
 
 import { useStore as useGoodsStore } from "@/stores/goods";
 
-
 export default {
     components: {
         Goods,
@@ -32,7 +31,7 @@ export default {
 .goods-section {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 80px;
+    grid-auto-rows: 70px;
     column-gap: 2rem;
 }
 .goods-section__goods {
@@ -55,15 +54,15 @@ export default {
 }
 
 @media screen and (max-width: 1600px) {
-    .wrapper {
+    .goods-section {
         padding-inline: 20px;
     }
 }
 @media screen and (max-width: 1100px) {
-    .wrapper {
+    .goods-section {
         display: block;
     }
-    .form{
+    .goods-section__form{
         margin: 20px 0;
     }
 }
