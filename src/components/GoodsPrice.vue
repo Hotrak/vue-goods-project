@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-// Стрелки ← ↑ → ↓ △ ▽ ◁ ▷ Cимволы стрелок и ...
+
 import cashMixin from "@/mixins/cash";
 export default {
     mixins: [cashMixin],
